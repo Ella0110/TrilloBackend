@@ -1,23 +1,24 @@
 services:
   web:
-    image: "ella0110/trillobackend:20241005.3"
+    image: "ella0110/trillobackend:20250115.10"
     ports:
       - "8080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
-      sqlserver: 
+      db: 
         condition: service_healthy
-  sqlserver:
-    image: "mcr.microsoft.com/mssql/server:latest"
+  db:
+    image: postgres
     environment:
-      - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=@Aa12345678
+      - POSTGRES_DB=trillo
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=@Aa12345678
+      - PGUSER=postgres
     ports:
       - "1433:1433"
     healthcheck:
-      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-C", "-S", "localhost", "-U", "sa", "-P", "@Aa12345678", "-Q", "SELECT 1", "-b", "-o", "/dev/null"]
-      # test: /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -Q 'SELECT 1' -b -o /dev/null
+      test: ["CMD-SHELL", "pg_isready", "-U", "postgres", "-d", "trillo"]
       interval: 10s
       timeout: 3s
       retries: 10
