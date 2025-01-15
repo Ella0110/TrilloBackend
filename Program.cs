@@ -11,8 +11,19 @@ builder.Services.AddDbContext<TrilloContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000",
+                            "https://ella0110.github.io") 
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
+var app = builder.Build();
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // Prepare database.
 using (var scope = app.Services.CreateScope())
 {
@@ -43,6 +54,7 @@ app.MapGet("/Ping", () =>
 .WithName("Ping")
 .WithOpenApi();
 
+app.UseCors("AllowSpecificOrigin");
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();

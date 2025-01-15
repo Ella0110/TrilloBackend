@@ -5,7 +5,7 @@ public class Booking
   public int? HotelId { get; set; }
   public int? OrderId { get; set; }
   // Properties
-  public DateTime Date { get; set; }
+  public DateTime? Date { get; set; }
   public double? Price { get; set; }
   public bool? isAvailable { get; set; }
   // Internal

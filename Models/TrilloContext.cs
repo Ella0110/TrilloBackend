@@ -16,31 +16,35 @@ public class TrilloContext : DbContext
       .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true)
       .AddEnvironmentVariables()
       .Build();
+    // log to console
+    // options.EnableSensitiveDataLogging(true);
+    // options.LogTo(Console.WriteLine);
     // Connect to the database.
-    options.UseSqlServer(configuration.GetConnectionString("TrilloDatabase"));
+    options.UseNpgsql(configuration.GetConnectionString("TrilloDatabase"));
+
   }
 
   // Generate Date/time.
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     modelBuilder.Entity<Booking>(e => {
-      e.Property(b => b.CreatedAt).HasDefaultValueSql("getdate()");
-      e.Property(b => b.UpdatedAt).HasDefaultValueSql("getdate()");
+      e.Property(b => b.CreatedAt).HasDefaultValueSql("now()");
+      e.Property(b => b.UpdatedAt).HasDefaultValueSql("now()");
     });
 
     modelBuilder.Entity<Hotel>(e => {
-      e.Property(b => b.CreatedAt).HasDefaultValueSql("getdate()");
-      e.Property(b => b.UpdatedAt).HasDefaultValueSql("getdate()");
+      e.Property(b => b.CreatedAt).HasDefaultValueSql("now()");
+      e.Property(b => b.UpdatedAt).HasDefaultValueSql("now()");
     });
 
     modelBuilder.Entity<Order>(e => {
-      e.Property(b => b.CreatedAt).HasDefaultValueSql("getdate()");
-      e.Property(b => b.UpdatedAt).HasDefaultValueSql("getdate()");
+      e.Property(b => b.CreatedAt).HasDefaultValueSql("now()");
+      e.Property(b => b.UpdatedAt).HasDefaultValueSql("now()");
     });
 
     modelBuilder.Entity<Review>(e => {
-      e.Property(b => b.CreatedAt).HasDefaultValueSql("getdate()");
-      e.Property(b => b.UpdatedAt).HasDefaultValueSql("getdate()");
+      e.Property(b => b.CreatedAt).HasDefaultValueSql("now()");
+      e.Property(b => b.UpdatedAt).HasDefaultValueSql("now()");
     });
   }
 }
