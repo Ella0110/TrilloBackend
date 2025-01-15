@@ -16,14 +16,14 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigin", policy =>
     {
         policy.WithOrigins("http://localhost:3000",
-                            "https://ella0110.github.io/trillo/") 
+                            "https://ella0110.github.io") 
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
 });
 
 var app = builder.Build();
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // Prepare database.
 using (var scope = app.Services.CreateScope())
 {
