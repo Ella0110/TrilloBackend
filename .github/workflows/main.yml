@@ -39,5 +39,5 @@ jobs:
         RUNNING_CONTAINERS=$(sudo docker ps -q)
         sudo docker stop $RUNNING_CONTAINERS
         sudo docker rm $RUNNING_CONTAINERS
-        sudo docker run -d -p 80:80 ella0110/trillobackend:latest
+        sudo docker compose up
         EOF
