@@ -36,6 +36,8 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }} << 'EOF'
         sudo docker pull ella0110/trillobackend:latest
-        sudo docker stop $(docker ps -a -q) || true
+        RUNNING_CONTAINERS=$(sudo docker ps -q)
+        sudo docker stop $RUNNING_CONTAINERS
+        sudo docker rm $RUNNING_CONTAINERS
         sudo docker run -d -p 80:80 ella0110/trillobackend:latest
         EOF
