@@ -55,7 +55,8 @@ app.MapGet("/Ping", () =>
 .WithName("Ping")
 .WithOpenApi();
 
-app.UseCors("AllowSpecificOrigin");
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors("AllowSpecificOrigin");
 app.MapControllers();
 app.Run();
