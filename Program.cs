@@ -16,7 +16,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigin", policy =>
     {
         policy.WithOrigins("http://localhost:3000",
-                            "https://ella0110.github.io") 
+                            "https://ella0110.github.io",
+                            "https://trillo.trillobe.com")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });

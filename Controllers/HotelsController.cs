@@ -120,7 +120,7 @@ namespace TrilloBackend.Controllers
 // ***********************************************************************************
 // ********PUT********
         // PUT: api/hotels/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Update hotel
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHotel(int id, Hotel hotel)
         {
@@ -153,7 +153,7 @@ namespace TrilloBackend.Controllers
 // ***********************************************************************************
 // ********POST********
         // POST: api/hotels
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // Create hotel
         [HttpPost]
         public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
