@@ -15,6 +15,8 @@ namespace TrilloBackend.Controllers
             _context = context;
         }
 
+// ***********************************************************************************
+// ********GET********
         // Get: api/orders
         [HttpGet("id")]
         public async Task<ActionResult<Order>> GetOrder(int id)
@@ -27,6 +29,8 @@ namespace TrilloBackend.Controllers
             return order;
         }
 
+// ***********************************************************************************
+// ********POST********
         // POST: api/orders
         [HttpPost("booking")]
         public async Task<ActionResult<IEnumerable<Order>>> PostGetOrder(string? hotelname, [FromQuery] string[] dates)
