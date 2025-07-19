@@ -12,7 +12,7 @@ public class Hotel
   public double? TotalRating { get; set; }
 
   // Internal
-  public DateTime CreatedAt { get; set; }
+  public DateTime CreatedAt { get; set; } 
   public DateTime UpdatedAt { get; set; }
   // Relation
   public List<Review> Reviews { get; set; } = new();
